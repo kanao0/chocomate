@@ -1,2 +1,93 @@
-<h1>Admin::Products#index</h1>
-<p>Find me in app/views/admin/products/index.html.erb</p>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <h5 class="border p-3 my-3">
+      商品一覧・追加
+    </h5>
+  </div>  
+  <%= render "layouts/errors", obj: @product %>
+
+<div class="row d-flex justify-content-center my-3">
+  <%= form_with model: @product, url: admin_products_path, method: :post do |f| %>
+    <div class="row d-flex justify-content-center">
+      <div class="mr-3">
+        <%= f.label :name, "商品名", class: "mr-3" %>
+      </div>
+      <div class="mr-5">
+        <%= f.text_field :name, placeholder: "商品名", class: "rounded" %>
+      </div>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+      <div class="mr-3">
+        <div>ブランド</div>
+      </div>
+      <div class="mr-5">
+        <%= f.collection_select :brand_id, Brand.all, :id, :name, include_blank: "-- 選択して下さい-- ", class: "rounded" %>
+      </div>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+      <div class="mr-3">
+        <div>種類</div>
+      </div>
+      <div class="mr-5">
+        <%= f.collection_select :type_id, Type.all, :id, :name, include_blank: "-- 選択して下さい-- ", class: "rounded" %>
+      </div>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+      <div class="mr-3">
+        <div>産地</div>
+      </div>
+      <div class="mr-5">
+        <%= f.collection_select :origin_id, Origin.all, :id, :name, include_blank: "-- 選択して下さい-- ", class: "rounded" %>
+      </div>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+      <div class="mr-3">
+        <div>価格</div>
+      </div>
+      <div class="mr-5">
+        <%= f.text_field :price, placeholder: "100", class: "rounded" %>円
+      </div>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+      <div>
+        <%= f.submit '新規登録', class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+  
+ <div class="row d-flex justify-content-center my-3">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>商品名</th>
+          <th>ブランド</th>
+          <th>種類</th>
+          <th>産地</th>
+          <th>価格</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td><%= product.name %></td>
+            <td><%= product.brand.name %></td>
+            <td><%= product.type.name %></td>
+            <td><%= product.origin.name %></td>
+            <td><%= product.price %>円</td>
+            <td><%= link_to "編集", edit_admin_product_path(product.id), class: "btn btn-success" %></td>
+            <td><%= link_to "削除", admin_product_path(product.id), method: :delete, data: { confirm: "削除してもよろしいですか？" }, class: "btn btn-danger" %></td>
+            </tr>            
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

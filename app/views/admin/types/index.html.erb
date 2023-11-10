@@ -1,2 +1,48 @@
-<h1>Admin::Types#index</h1>
-<p>Find me in app/views/admin/types/index.html.erb</p>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <h5 class="border p-3 my-3">
+      種類一覧・追加
+    </h5>
+  </div>  
+  <%= render "layouts/errors", obj: @type %>
+  <div class="row d-flex justify-content-center my-3">
+    <%= form_with model: @type, url: admin_types_path, method: :post do |f| %>
+      <div class="row d-flex justify-content-center">
+        <div class="mr-3">
+          <%= f.label :name, "種類", class: "mr-3" %>
+        </div>
+        <div class="mr-5">
+          <%= f.text_field :name, placeholder: "種類", class: "rounded" %>
+        </div>
+        <div>
+          <%= f.submit '新規登録', class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row d-flex justify-content-center">
+    <div class="pull-left">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>種類</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @types.each do |type| %>
+            <tr>
+              <td><%= type.name %></td>
+              <td></td>
+              <td><%= link_to "編集", edit_admin_type_path(type.id), class: "btn btn-success" %></td>
+              <td><%= link_to "削除", admin_type_path(type.id), method: :delete, data: { confirm: "削除してもよろしいですか？" }, class: "btn btn-danger" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
