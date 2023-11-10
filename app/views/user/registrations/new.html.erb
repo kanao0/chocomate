@@ -4,31 +4,31 @@
   <%= render "user/shared/error_messages", resource: resource %>
   
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.label :name, "ユーザー名" %><br>
+    <%= f.text_field :name , :size=>"45", placeholder: "ユーザーネームを入力", autofocus: true, style: "height: 35px;" %>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :email, "メールアドレス" %><br />
+    <%= f.email_field :email, :size=>"45", placeholder: "メールアドレスを入力(choco＠chocomate.com)", autocomplete: "email" ,style: "height: 35px;" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :password, "パスワード" %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %> 文字以上)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, :size=>"45", placeholder: "パスワードをを入力(半角英字)", autocomplete: "new-password",style: "height: 35px;" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.label :password_confirmation, "パスワード(確認用)" %><br />
+    <%= f.password_field :password_confirmation, :size=>"45", placeholder: "パスワードをを入力(半角英字)", autocomplete: "new-password", style: "height: 35px;" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "会員登録する" %>
   </div>
 <% end %>
 
-<%= render "user/shared/links" %>
+<p>会員登録がお済みの方<%= render "user/shared/links" %>からログイン</p>

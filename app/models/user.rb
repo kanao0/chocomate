@@ -6,6 +6,12 @@ class User < ApplicationRecord
 
   # ユーザー1人につき1つのプロフィール画像
   has_one_attached :profile_image
+  # 1人のユーザーは複数のレビューを投稿できる、ユーザーが消えたらそのレビューも消える
+  has_many :reviews, dependent: :destroy  
+  # 1人のユーザーは複数コメントできる、ユーザーが消えたらそのコメントも消える
+  has_many :review_comments, dependent: :destroy  
+ 
+  
 
   # ゲストユーザーのメールアドレス
   GUEST_USER_EMAIL = "guest@example.com"
@@ -17,7 +23,6 @@ class User < ApplicationRecord
       user.bio = "これはゲストユーザーです"
     end
   end
-
 
 
   # プロフィールイメージがないとき
