@@ -1,2 +1,36 @@
-<h1>User::Users#show</h1>
-<p>Find me in app/views/user/users/show.html.erb</p>
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <div class="row">
+        <%= image_tag @user.get_profile_image(100, 100) %>
+      </div>
+      <p></p>
+      	 ユーザーネーム
+      	  [<%= @user.name %>]
+      	  自己紹介
+      	  [<%= @user.bio %>]
+  
+    レビュー数   <%= @user.reviews.count %>
+      <% if current_user == @user %>
+        <div class='row'>
+          <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
+          <i class="fas fa-user-cog"></i>
+          <% end %>
+        </div>
+      <% end %>      
+    </div>
+    <!--自分が投稿した本一覧-->
+    <div class='col-md-8 offset-md-1'>
+      <h2><%= @user.name %> さんのレビュー</h2>
+      レビューがどーんと
+
+    <% @reviews.each do |review| %>
+ 
+          <!--<　%= image_tag review.user.get_profile_image, size:'50x50' %>-->
+        </td>
+        <td><%= review.product_id.name %></td>
+        <td><%= review.body %></td>
+    <% end %>
+    </div>
+  </div>
+</div>  

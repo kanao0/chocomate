@@ -1,13 +1,21 @@
 Rails.application.routes.draw do
 
+  devise_for :users,skip: [:passwords], controllers: {
+    registrations: "user/registrations",
+    sessions: 'user/sessions'
+  }
+
+  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+    sessions: "admin/sessions"
+  }
+
+# # ゲストユーザー用のルーティング
+  devise_scope :user do
+    post "user/guest_sign_in", to: "user/sessions#guest_sign_in"
+  end  
+
   root to: 'user/homes#top'
 
-  scope module: :user do
-    get 'users/mypage' => 'users#show'
-    get 'users/quit' => 'users#quit'
-    patch 'users/withdraw' => 'users#withdraw'
-    resources :users, only: [:edit, :update]
-  end
 
   scope module: :user do
     resources :reviews
@@ -45,19 +53,10 @@ Rails.application.routes.draw do
   end
 
 
-  devise_for :users,skip: [:passwords], controllers: {
-    registrations: "user/registrations",
-    sessions: 'user/sessions'
-  }
-
-  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
-    sessions: "admin/sessions"
-  }
-
-# ゲストユーザー用のルーティング
-  devise_scope :user do
-    post "user/guest_sign_in", to: "user/sessions#guest_sign_in"
+  scope module: :user do
+    get 'users/quit' => 'users#quit'
+    patch 'users/withdraw' => 'users#withdraw'
+    resources :users, only: [:show, :edit, :update]
   end
-
 
 end

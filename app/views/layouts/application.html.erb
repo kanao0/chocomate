@@ -30,7 +30,7 @@
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
                 <li class="nav-item">
-                  <%= link_to 'マイページ', users_mypage_path, class: 'nav-link text-light m-2' %>
+                  <%= link_to 'マイページ', user_path(current_user), class: 'nav-link text-light m-2' %>
                 </li>
 
                 <li class="nav-item">
@@ -47,22 +47,22 @@
 
               <% elsif admin_signed_in? %>
                 <li class="nav-item">
-                  <%= link_to "商品一覧", root_path, class: 'nav-link text-light m-2' %>
+                  <%= link_to "商品一覧", admin_products_path, class: 'nav-link text-light m-2' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "種類一覧", root_path, class: 'nav-link text-light m-2' %>
+                  <%= link_to "種類一覧", admin_types_path, class: 'nav-link text-light m-2' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "産地一覧", root_path, class: 'nav-link text-light m-2' %>
+                  <%= link_to "産地一覧", admin_origins_path, class: 'nav-link text-light m-2' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "ブランド一覧", root_path, class: 'nav-link text-light m-2' %>
+                  <%= link_to "ブランド一覧", admin_brands_path, class: 'nav-link text-light m-2' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "レビューを見る", root_path, class: 'nav-link text-light m-2' %>
+                  <%= link_to "レビューを見る", reviews_path, class: 'nav-link text-light m-2' %>
                 </li>
                 <li class="nav-item">
-                  <%= link_to "会員一覧", root_path, class: 'nav-link text-light m-2' %>
+                  <%= link_to "会員一覧", admin_users_path, class: 'nav-link text-light m-2' %>
                 </li>
                 <li class="nav-item">
                   <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-light m-2' %>
