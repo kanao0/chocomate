@@ -14,7 +14,9 @@ Rails.application.routes.draw do
 
 
   scope module: :user do
-    resources :reviews
+    resources :reviews do
+      resources :review_comments, only: [:create, :destroy]
+    end
   end
 
   namespace :admin do
@@ -57,6 +59,6 @@ Rails.application.routes.draw do
    # ゲストユーザー用のルーティング
   devise_scope :user do
     post "user/guest_sign_in", to: "user/sessions#guest_sign_in"
-  end   
+  end
 
 end
