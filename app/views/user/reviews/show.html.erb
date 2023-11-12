@@ -28,7 +28,12 @@
       <li>産地：
         <%= @review.product.origin.name %>
       </li>
-
+      <li>
+        <% @review_tags.each do |tag| %>
+        <i class="fa-sharp fa-solid fa-tag"></i>
+          <%= tag.name %>
+        <% end %>
+      </li>
     <div class="col-5">
 
 
