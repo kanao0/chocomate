@@ -5,8 +5,8 @@ class Product < ApplicationRecord
   belongs_to :type
   # 産地に属する
   belongs_to :origin
-  # 1つの商品に複数レビューが書ける、レビューが消えたらその商品も消える
-  has_many :reviews, dependent: :destroy
+  # 1つの商品に複数レビューが書ける、レビューが消えたらその商品も消える, dependent: :destroy
+  has_many :reviews
   
   # 空で登録だめ、一意性持たせる
   validates :name, presence: true, uniqueness: true

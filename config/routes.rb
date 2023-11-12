@@ -9,10 +9,6 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-# # ゲストユーザー用のルーティング
-  devise_scope :user do
-    post "user/guest_sign_in", to: "user/sessions#guest_sign_in"
-  end  
 
   root to: 'user/homes#top'
 
@@ -58,5 +54,9 @@ Rails.application.routes.draw do
     patch 'users/withdraw' => 'users#withdraw'
     resources :users, only: [:show, :edit, :update]
   end
+   # ゲストユーザー用のルーティング
+  devise_scope :user do
+    post "user/guest_sign_in", to: "user/sessions#guest_sign_in"
+  end   
 
 end

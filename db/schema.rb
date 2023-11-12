@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 2023_11_09_051951) do
     t.integer "user_id", null: false
     t.integer "product_id", null: false
     t.text "body", null: false
-    t.float "rate", null: false
+    t.float "rate", default: 1.0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

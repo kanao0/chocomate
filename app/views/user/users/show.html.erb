@@ -2,35 +2,61 @@
   <div class='row'>
     <div class='col-md-3'>
       <div class="row">
-        <%= image_tag @user.get_profile_image(100, 100) %>
+        <%= image_tag @user.get_profile_image(200, 200) %>
       </div>
-      <p></p>
-      	 ユーザーネーム
-      	  [<%= @user.name %>]
-      	  自己紹介
-      	  [<%= @user.bio %>]
-  
-    レビュー数   <%= @user.reviews.count %>
-      <% if current_user == @user %>
-        <div class='row'>
-          <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
-          <i class="fas fa-user-cog"></i>
-          <% end %>
-        </div>
-      <% end %>      
-    </div>
-    <!--自分が投稿した本一覧-->
-    <div class='col-md-8 offset-md-1'>
-      <h2><%= @user.name %> さんのレビュー</h2>
-      レビューがどーんと
-
-    <% @reviews.each do |review| %>
- 
-          <!--<　%= image_tag review.user.get_profile_image, size:'50x50' %>-->
-        </td>
-        <td><%= review.product_id.name %></td>
-        <td><%= review.body %></td>
+      <table class="teble">
+        <tr>
+          <th>ユーザーネーム</th>
+        </tr>
+        <tr>
+          <td><%= @user.name %></td>
+        </tr>
+        <tr>
+          <th>自己紹介</th>
+        </tr>
+        <tr>
+          <td><%= @user.bio %></td>
+        </tr>
+      </table>
+      <div>レビュー数：  <%= @user.reviews.count %></div>
+    <% if current_user == @user %>
+      <div class='row'>
+        <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
+        <i class="fas fa-user-cog"></i>
+        <% end %>
+      </div>
     <% end %>
     </div>
+
+    <div class='col-md-8 offset-md-1'>
+      <h4><%= @user.name %> さんのレビュー</h4>
+      <!-- レビューがどーんと並ぶ -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>商品名</th>
+            <th>レビュー</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @reviews.each do |review| %>
+            <tr>
+              <td><%= image_tag review.get_image(150, 150) %></td>
+              <td><%= review.product.name %></td>
+              <td><%= render "user/reviews/static_rate", review: review %></td>
+              <td>
+              <% if review.user == current_user %>
+                <%= link_to "編集", edit_review_path(review.id), class: "btn btn-sm btn-success" %>
+                <%= link_to "削除", review_path(review.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+              <% end %><br>
+               <%= link_to ">> Read more", review_path(review.id) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>  
+</div>

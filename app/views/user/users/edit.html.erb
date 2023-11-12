@@ -1,32 +1,25 @@
-  <div class="container">
+  <div class="container px-5 px-sm-0">
     <div class="row">
-      <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-      <h1>マイページ管理</h1>
-      <% if @user.errors.any? %>
-        <%= @user.errors.count %>error prohibited this obj from being saved:
-        <ul>
-          <% @user.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      <% end %>
-      　<!--users editから-->
-      <%= form_with model: @user do |f| %>
-
-        <div>ユーザーネーム</div>
-        <%= @user.name %>
-        <%= f.text_field :name %>
-
-        <div>プロフィール画像</div>
-        <%= image_tag @user.get_profile_image(100, 100) %>
-        <%= f.file_field :profile_image, accept: "image/*" %>
-
-        <div>自己紹介</div>
-        <%= f.text_area :bio, placeholder: "自己紹介文を入力" %>
-        メールアドレス
-        <%= f.text_field :email, :size=>"45", placeholder: "メールアドレスを入力(choco＠chocomate.com)", autocomplete: "email" ,style: "height: 35px;" %>
-        <%= f.submit "Update User" %>
-      <% end %>
+      <div class="col-sm-12 col-md-8 col-lg-10 px-5 px-sm-0 mx-auto">
+        <h1>マイページ管理</h1>
+        <div class="row d-flex justify-content-center">
+          <%= render "layouts/errors", obj: @user %>
+        </div>      
+        <%= form_with model: @user do |f| %>
+          <div>ユーザーネーム</div>
+          <%= @user.name %>
+          <%= f.text_field :name %>
+  
+          <div>プロフィール画像</div>
+          <%= image_tag @user.get_profile_image(100, 100) %>
+          <%= f.file_field :profile_image, accept: "image/*" %>
+  
+          <div>自己紹介</div>
+          <%= f.text_area :bio, placeholder: "自己紹介文を入力" %>
+          メールアドレス
+          <%= f.text_field :email, :size=>"45", placeholder: "メールアドレスを入力(choco＠chocomate.com)", autocomplete: "email" ,style: "height: 35px;" %>
+          <%= f.submit "Update User" %>
+        <% end %>
       
       退会手続きをする<%= link_to "退会する", users_quit_path, class:"btn btn-danger mx-2" %>
       </div>

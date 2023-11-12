@@ -1,2 +1,30 @@
-<h1>User::Reviews#index</h1>
-<p>Find me in app/views/user/reviews/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-10 px-5 px-sm-0 mx-auto">
+      <h2>みんなのレビューチョコ</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>画像</th>
+            <th>商品名</th>
+            <th>本文</th>
+            <th>評価</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @reviews.each do |review| %>
+            <tr>
+              <td><%= image_tag review.get_image(100, 100) %></td>
+              <td><%= review.product.name %></td>
+              <td><%= review.body %></td>
+              <td>
+                <%= review.rate %>点<br>
+                <%= render "static_rate", review: review %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>  
+  </div>
+</div>
