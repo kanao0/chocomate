@@ -1,3 +1,4 @@
+<!--レビューしたユーザーがログインしたユーザーじゃなかったら-->
 <% if current_user != @review.user %>
   <div class="bookmark">
     <% if @review.find_bookmark(current_user).blank? %>

@@ -16,6 +16,15 @@
 // header {
 //   font-family: "Sawarabi Mincho";
 // }
+
+// 外枠
+.custom-border {
+  border-width: 5px;
+  border-style: solid;
+  border-color: #bd948b;
+}
+
+
 .outer-container {
   border: 10px solid #ccc; /* 枠線のスタイルを設定 */
   padding: 15px; /* 枠内の余白を設定 */
