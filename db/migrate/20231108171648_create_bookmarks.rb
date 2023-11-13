@@ -1,10 +1,12 @@
 class CreateBookmarks < ActiveRecord::Migration[6.1]
   def change
     create_table :bookmarks do |t|
-      t.integer :user_id
-      t.integer :review_id
+      t.references :user, null: false, foreign_key: true
+      t.references :review, null: false, foreign_key: true
 
       t.timestamps
     end
+    # bookmarksにおいてuser_idとpost_idの組み合わせを一意性あるものにする
+    add_index  :bookmarks, [:user_id, :review_id], unique: true
   end
 end

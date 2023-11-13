@@ -1,6 +1,7 @@
 class User::UsersController < ApplicationController
   # edit,updateアクション前にensure_correct_user実行
-  before_action :ensure_correct_user, only: [:edit, :update]
+  # before_action :ensure_correct_user, only: [:edit, :update]
+  # before_action :authenticate_user!, only: [:edit, :update]
 
   def show
     @user = User.find(params[:id])
@@ -39,12 +40,12 @@ class User::UsersController < ApplicationController
 
   # 他人のユーザ情報編集画面にいけないようにするやつ
   # 勝手に編集しようとする人は自分のuser/showページへ行く
-  def ensure_correct_user
-    @review = Review.find(params[:id])
-    @user = current_user
-    unless @review.user == @user
-      redirect_to user_path(@user)
-    end
-  end
+  # def ensure_correct_user
+  #   @review = Review.find(params[:id])
+  #   @user = current_user
+  #   unless @review.user == @user
+  #     redirect_to user_path(@user)
+  #   end
+  # end
 
 end

@@ -1,7 +1,15 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-8 col-lg-10 px-5 px-sm-0 mx-auto">
-      <h2>みんなのレビューチョコ<%= @tag.name if @tag.present? %></h2>
+    <div class="col px-5 px-sm-0 mx-auto">
+      <h2>みんなのレビューチョコ
+      <% if @tag.present? %>
+      <i class="fa-sharp fa-solid fa-tag"></i>
+        <%= @tag.name %>
+        <!--(<　%= @tag.count %>)-->
+        (全<%= @tag.reviews.count %>件)
+      <% end %>
+
+      </h2>
       <table class="table">
         <thead>
           <tr>
@@ -10,6 +18,7 @@
             <th>本文</th>
             <th>タグ</th>
             <th>評価</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -17,19 +26,19 @@
             <tr>
               <td><%= image_tag review.get_image(100, 100) %></td>
               <td><%= review.product.name %></td>
-              <td><%= review.body %></td>
+              <td><%= truncate(review.body, length: 15) %></td>
               <td>
                 <!--タグ-->
                 <% review.tags.each do |tag| %>
                   <i class="fa-sharp fa-solid fa-tag"></i>
-                  <%#= tag.name %>
-                  <%=link_to tag.name, reviews_path(tag_name: tag.name) %>
+                  <%= link_to tag.name, reviews_path(tag_name: tag.name) %>
                 <% end %>
               </td>
               <td>
                 <%= review.rate %>点<br>
                 <%= render "static_rate", review: review %>
               </td>
+              <td><%= link_to ">> Read more", review_path(review.id) %></td>
             </tr>
           <% end %>
         </tbody>

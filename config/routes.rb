@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   scope module: :user do
     resources :reviews do
       resources :review_comments, only: [:create, :destroy]
+      resources :bookmarks, only: [:create, :destroy]
     end
   end
 
@@ -41,9 +42,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :reviews, only: [:index, :show, :edit, :update, :destroy]
-    get 'reviews/index'
-    get 'reviews/show'
-    get 'reviews/edit'
   end
 
   namespace :admin do

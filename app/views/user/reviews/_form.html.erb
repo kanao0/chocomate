@@ -15,8 +15,8 @@
   <div class="field">
     <%= f.label"タグ (,で区切ると複数タグ登録できます)" %>
     <%= f.text_field :name, value: @tag_list,class: "form-control"%>
-  </div>  
-  <!--タグ-->  
+  </div>
+  <!--タグ-->
   <!--星評価ここから-->
   <% if @review.id.nil? %>
     <div class="form-group" id="star">
@@ -47,6 +47,10 @@
   <% end %>
   <!--星評価ここまで-->
   <div>
-    <%= f.submit "レビューを投稿する" %>
+    <% if @review.new_record? %>
+      <%= f.submit "レビューを投稿する" %>
+    <% else %>
+      <%= f.submit "レビューを編集する" %>
+    <% end %>
   </div>
 <% end %>

@@ -53,10 +53,13 @@ ActiveRecord::Schema.define(version: 2023_11_09_051951) do
   end
 
   create_table "bookmarks", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "review_id"
+    t.integer "user_id", null: false
+    t.integer "review_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["review_id"], name: "index_bookmarks_on_review_id"
+    t.index ["user_id", "review_id"], name: "index_bookmarks_on_user_id_and_review_id", unique: true
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
   create_table "brands", force: :cascade do |t|
@@ -101,7 +104,7 @@ ActiveRecord::Schema.define(version: 2023_11_09_051951) do
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index "\"re_id\", \"tag_id\"", name: "index_review_tags_on_re_id_and_tag_id", unique: true
+    t.index ["review_id", "tag_id"], name: "index_review_tags_on_review_id_and_tag_id", unique: true
     t.index ["review_id"], name: "index_review_tags_on_review_id"
     t.index ["tag_id"], name: "index_review_tags_on_tag_id"
   end
@@ -145,6 +148,8 @@ ActiveRecord::Schema.define(version: 2023_11_09_051951) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bookmarks", "reviews"
+  add_foreign_key "bookmarks", "users"
   add_foreign_key "review_tags", "reviews"
   add_foreign_key "review_tags", "tags"
 end

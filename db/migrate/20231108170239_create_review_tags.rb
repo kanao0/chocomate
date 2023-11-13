@@ -8,7 +8,7 @@ class CreateReviewTags < ActiveRecord::Migration[6.1]
       t.timestamps
     end
     # 同じタグを２回保存するのは出来ないようになる
-    add_index :review_tags, [:re_id, :tag_id], unique: true
-  
+    add_index :review_tags, [:review_id, :tag_id], unique: true
+
   end
 end

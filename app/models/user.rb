@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   # 1人のユーザーは複数コメントできる、ユーザーが消えたらそのコメントも消える
   has_many :review_comments, dependent: :destroy
+  # ユーザーは複数のレビューをブックマークできる、ユーザーが消えたらそのブックマークも消える
+  has_many :bookmarks, dependent: :destroy
   # 空で登録できない
   validates :name, presence: true
 

@@ -1,0 +1,15 @@
+<% if current_user != @review.user %>
+  <div class="bookmark">
+    <% if @review.find_bookmark(current_user).blank? %>
+    <!-- ブックマーク登録 -->
+      <%= link_to review_bookmarks_path(@review), method: :post do %>
+        <i class="fa-regular fa-bookmark" style="font-size: 80px; color: #6a2f36;"></i>
+      <% end %>
+    <% else %>
+    <!-- ブックマーク解除 -->
+      <%= link_to review_bookmark_path(@review, @review.find_bookmark(current_user)), method: :delete do %>
+        <i class="fas fa-bookmark" style="font-size: 80px; color: #6a2f36;"></i>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

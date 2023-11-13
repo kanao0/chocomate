@@ -23,6 +23,7 @@ class User::ReviewsController < ApplicationController
 
   def index
     @reviews = Review.all
+    # paramsにtag_nameが含まれているときそのtagがついてるレビューを表示
     if params[:tag_name]
       @tag =Tag.find_by(name: params[:tag_name])
       @reviews = @tag.reviews
@@ -41,7 +42,7 @@ class User::ReviewsController < ApplicationController
 
   def edit
     @review = Review.find(params[:id])
-    # pluckはmapと同じ意味ですt
+    # pluckはmapと同じ意味t
     @tag_list = @review.tags.pluck(:name).join(',')
   end
 
