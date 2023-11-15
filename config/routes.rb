@@ -52,8 +52,11 @@ Rails.application.routes.draw do
   scope module: :user do
     get 'users/quit' => 'users#quit'
     patch 'users/withdraw' => 'users#withdraw'
-    resources :users, only: [:show, :edit, :update]
+    resources :users, only: [:show, :edit, :update]do
+      get :bookmarks, on: :member
+    end
   end
+
    # ゲストユーザー用のルーティング
   devise_scope :user do
     post "user/guest_sign_in", to: "user/sessions#guest_sign_in"

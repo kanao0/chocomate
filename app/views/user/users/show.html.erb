@@ -21,8 +21,12 @@
       <div>レビュー数：  <%= @user.reviews.count %></div>
     <% if current_user == @user %>
       <div class='row'>
+        <!--ブックマークページへ-->
+        <%= link_to bookmarks_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
+          <i class="fas fa-bookmark"></i>
+        <% end %>
         <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
-        <i class="fas fa-user-cog"></i>
+          <i class="fas fa-user-cog"></i>
         <% end %>
       </div>
     <% end %>

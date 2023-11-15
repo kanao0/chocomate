@@ -21,6 +21,13 @@ class User::UsersController < ApplicationController
     end
   end
 
+  def bookmark
+    @user = User.find(params[:id])
+    @bookmark_reviews = @user.bookmarks
+    p @bookmark_reviews
+    # @reviews = @user.bookmarks.review
+  end
+
   def quit
   end
 

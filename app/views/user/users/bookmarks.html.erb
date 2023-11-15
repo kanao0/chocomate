@@ -1,0 +1,14 @@
+ここはブックマークのページです
+
+<% @bookmark_reviews.each do |review| %>
+  <tr>
+    <td><%= image_tag review.review.bookmarkget_image(150, 150) %></td>
+    <td><%= review.product.name %></td>
+    <td><%= render "user/reviews/static_rate", review: review %></td>
+    <td>
+     <%= link_to ">> Read more", review_path(review.id) %>
+    </td>
+  </tr>
+<% end %>
+
+ <%= link_to "マイページに戻る", user_path(@user), class: "btn btn-outline-secondary btn-block" %>

@@ -13,10 +13,10 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #d1b3aa;">
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #6a2f36;">
         <div class="container">
           <div class="d-flex">
-            <a class="navbar-brand" href="/"><%= image_tag 'logo_chocomate.png', :size =>'75x75' %></a>
+            <a class="navbar-brand" href="/"><%= image_tag 'logo.png', :size =>'75x75' %></a>
             <% if user_signed_in? %>
               <div class="nav-item text-light my-auto ml-4">
                 ようこそ、<%= current_user.name %>さん！
@@ -105,7 +105,7 @@
       </row>
 
     <%= yield %>
-    <footer class='fixed-bottom text-light' style="background-color: #c2b1a5;">
+    <footer class='fixed-bottom text-light' style="background-color: #6a2f36;">
       <div class="container">
       	<div class='row'>
         	<div class='mx-auto my-2'>

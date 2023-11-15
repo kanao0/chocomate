@@ -1,23 +1,18 @@
-<div class="outer-container">
-<h2>投稿したレビューの詳細</h2>
-<%= render "bookmark", review: @review %>
-<div class="container">
-  <div class="row">
-    <div class="col-2">
+<!--<div class="outer-container">-->
+<h3>投稿したレビューの詳細</h3>
+
       <%= image_tag @review.get_image(200, 200) %><br>
-      <%= @review.user.name %>
-    </div>
-    <div class="col-10">
-      <div class="row">
-        <div class="col-7 offset-md-2">
-          <h3><%= @review.product.name %></h3>
-        </div>
-        <div class="col-3">
-          <%= render "static_rate", review: @review %>
-        </div>
-      </div>
-    </div>
-  </div>
+
+        <h3><%= @review.product.name %></h3>
+        <!--ブックマーク-->
+        <%= render "bookmark", review: @review %>
+        <!--投稿日-->
+    <%= @review.created_at.strftime('%Y/%m/%d') %>
+ <!--レビューしたユーザーのプロフィールイメージ-->
+    <%= image_tag @review.user.get_profile_image(150, 150) %><br>
+       <%= @review.user.name %>
+    <!--星評価-->
+    <%= render "static_rate", review: @review %>
       <li>ブランド：
         <%= @review.product.brand.name %>
       </li>
@@ -36,8 +31,7 @@
           <%= link_to tag.name, reviews_path(tag_name: tag.name) %>
         <% end %>
       </li>
-    <div class="col-5">
-    <h4>レビュー内容</h4>
+    <h4>レビュー本文</h4>
     <p><%= @review.body %></p>
 
 
@@ -45,12 +39,9 @@
           <td><%= link_to "編集", edit_review_path, class: "btn btn-sm btn-success" %></td>
           <td><%= link_to "削除", review_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
       <% end %>
-  </div>
-</div>
-<div class="container mt-5">
-  <div class="row">
+
+
     <!--コメント欄ここ-->
-    <div class="col mx-auto">
       <p>コメント件数：<%= @review.review_comments.count %></p>
       <% @review.review_comments.each do |review_comment| %>
         <p><%= image_tag review_comment.user.get_profile_image(100,100) %></p>
@@ -61,15 +52,12 @@
           <%= link_to "削除", review_review_comment_path(@review,review_comment), method: :delete, data: { confirm: '削除しますか？' }, class: "btn btn-sm btn-danger" %>
         <% end %><br>
       <% end %>
-    </div>
-
-    <div class="col">
       <!--コメント投稿フォーム-->
       <%= form_with model: [@review, @review_comment] do |f| %>
         <%= f.text_area :comment, rows: '5', placeholder: "コメント" %>
         <%= f.submit "送信する" %>
       <% end %>
-    </div>
-  </div>
-</div>
-</div>
+
+<!--</div>-->
+
+
