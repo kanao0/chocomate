@@ -1,65 +1,6 @@
-<div class="container">
+<div class="container border p-3">
   <div class="row d-flex justify-content-center">
-      <h5 class="border p-3 my-3">
-        会員情報編集
-      </h5>
-  </div>
-  <%= render "layouts/errors", obj: @user %>
-
-  <div class="row d-flex justify-content-center">
-    <%= form_with model: @user, url: admin_user_path, method: :patch do |f| %>
-      <table class="table table-borderless">
-        <tr>
-          <td>会員ID</td>
-          <td><%= @user.id %></td>
-          <td></td>
-        </tr>
-
-        <tr>
-          <td>ユーザーネーム</td>
-          <td><%= f.text_field :name, class: "rounded" %></td>
-        </tr>
-
-
-        <tr>
-        <td>メールアドレス</td>
-        <td><%= f.text_field :email, class: "rounded" %></td>
-        <td></td>
-        </tr>
-        
-     <div class="form-group">
-            <label for="user_bio">自己紹介</label>
-            <%= f.text_area :bio, placeholder: "自己紹介文を入力", class: "form-control", rows: 5 %>
-          </div>
-    
-        
-
-        <tr>
-          <td>会員ステータス</td>
-          <td>
-            <%= f.radio_button :is_active, :true %>
-            <%= f.label :is_active, "有効", { value: :true }  %>
-
-            <%= f.radio_button :is_active, :false %>
-            <%= f.label :is_active, "退会", { value: :false } %>
-          </td>
-        </tr>
-      </table>
-
-      <div class="row d-flex justify-content-center">
-        <tr>
-          <td></td>
-          <td><%= f.submit "変更を保存", class:"btn btn-success" %></td>
-        </tr>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-
-<div class="container">
-  <div class="row d-flex justify-content-center">
-    <h5 class="border p-3 my-3">
+    <h5>
       会員情報編集
     </h5>
   </div>
@@ -76,69 +17,13 @@
 
         <tr>
           <td>ユーザーネーム</td>
-          <td><%= f.text_field :name, class: "rounded" %></td>
-        </tr>
-
-        <tr>
-          <td>メールアドレス</td>
-          <td><%= f.text_field :email, class: "rounded" %></td>
-        </tr>
-
-        <tr>
-          <td>自己紹介</td>
-          <td>
-            <%= f.text_area :bio, placeholder: "自己紹介文を入力", class: "form-control rounded", rows: 5 %>
-          </td>
-        </tr>
-
-        <tr>
-          <td>会員ステータス</td>
-          <td>
-            <%= f.radio_button :is_active, :true %>
-            <%= f.label :is_active, "有効", { value: :true }  %>
-
-            <%= f.radio_button :is_active, :false %>
-            <%= f.label :is_active, "退会", { value: :false } %>
-          </td>
-        </tr>
-
-        <tr>
-          <td></td>
-          <td><%= f.submit "変更を保存", class: "btn btn-success" %></td>
-        </tr>
-      </table>
-    <% end %>
-  </div>
-</div>
-
-
-<div class="container">
-  <div class="row d-flex justify-content-center">
-    <h5 class>
-      会員情報編集
-    </h5>
-  </div>
-
-  <%= render "layouts/errors", obj: @user %>
-
-  <div class="row d-flex justify-content-center">
-    <%= form_with model: @user, url: admin_user_path, method: :patch do |f| %>
-      <table class="table table-borderless">
-        <tr>
-          <td>会員ID</td>
-          <td><%= @user.id %></td>
-        </tr>
-
-        <tr>
-          <td>ユーザーネーム</td>
-          <td><%= f.text_field :name, class: "rounded" %></td>
+          <td><%= f.text_field :name, class: "form-control rounded" %></td>
         </tr>
 
         <tr>
           <td>プロフィール画像</td>
           <td>
             <div class="form-group">
-              <label for="user_profile_image">プロフィール画像</label><br>
               <%= f.file_field :profile_image, accept: "image/*" %>
             </div>
           </td>
@@ -146,7 +31,7 @@
 
         <tr>
           <td>メールアドレス</td>
-          <td><%= f.text_field :email, class: "rounded" %></td>
+          <td><%= f.text_field :email, class: "form-control rounded" %></td>
         </tr>
 
         <tr>

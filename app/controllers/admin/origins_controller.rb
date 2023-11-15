@@ -1,5 +1,6 @@
 class Admin::OriginsController < ApplicationController
-
+  before_action :authenticate_admin!
+  
   def index
     @origin = Origin.new
     @origins = Origin.all

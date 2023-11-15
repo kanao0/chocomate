@@ -1,2 +1,58 @@
-<h1>Admin::Reviews#index</h1>
-<p>Find me in app/views/admin/reviews/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col px-5 px-sm-0 mx-auto">
+      <h2>みんなのレビューチョコ
+      <% if @tag.present? %>
+      <i class="fa-sharp fa-solid fa-tag"></i>
+        <%= @tag.name %>
+        (全<%= @tag.reviews.count %>件)
+      <% end %>
+      </h2>
+
+      <div class="my-3">
+        < %= form_tag(reviews_search_path, method: :get) do %>
+          < %= collection_select(:search, :product, Product.all, :id, :name) %>
+          < %= submit_tag '検索', name: nil %>
+        < % end %>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>画像</th>
+            <th>商品名</th>
+            <th>本文</th>
+            <th>タグ</th>
+            <th>評価</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @reviews.each do |review| %>
+            <tr>
+              <td>
+                <%= image_tag review.get_image(100, 100) %><br>
+                <%= link_to review.user.name , admin_user_path(review.user.id) %>
+              </td>
+              <td><%= review.product.name %></td>
+              <td><%= truncate(review.body, length: 15) %></td>
+              <td>
+                <!--タグ-->
+                <% review.tags.each do |tag| %>
+                  <i class="fa-sharp fa-solid fa-tag"></i>
+                  <%= link_to tag.name, admin_reviews_path(tag_name: tag.name) %>
+                <% end %>
+              </td>
+              <td>
+                <%= review.rate %>点<br>
+                <%= render "user/reviews/static_rate", review: review %>
+              </td>
+              <td><%= link_to ">> Read more", admin_review_path(review.id) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @reviews, theme: 'bootstrap-5' %>
+    </div>
+  </div>
+</div>

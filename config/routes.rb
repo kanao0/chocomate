@@ -14,48 +14,37 @@ Rails.application.routes.draw do
 
 
   scope module: :user do
+    get 'reviews/search' => 'reviews#search'
+    get 'reviews/bookmarks' => 'users#bookmarks'
     resources :reviews do
       resources :review_comments, only: [:create, :destroy]
       resources :bookmarks, only: [:create, :destroy]
     end
-  end
-
-  namespace :admin do
-    get 'homes/top'
-  end
-
-  namespace :admin do
-    resources :origins, only: [:index, :create, :edit, :update, :destroy]
-  end
-
-  namespace :admin do
-    resources :types, only: [:index, :create, :edit, :update, :destroy]
-  end
-
-  namespace :admin do
-    resources :brands, only: [:index, :create, :edit, :update, :destroy]
-  end
-
-  namespace :admin do
-    resources :products, only: [:index, :create, :edit, :update, :destroy]
-  end
-
-  namespace :admin do
-    resources :reviews, only: [:index, :show, :edit, :update, :destroy]
-  end
-
-  namespace :admin do
-    resources :users, only: [:index, :show, :edit, :update]
-  end
-
-
-  scope module: :user do
     get 'users/quit' => 'users#quit'
     patch 'users/withdraw' => 'users#withdraw'
     resources :users, only: [:show, :edit, :update]do
       get :bookmarks, on: :member
     end
   end
+
+  namespace :admin do
+    get 'homes/top'
+    resources :origins, only: [:index, :create, :edit, :update, :destroy]
+    resources :types, only: [:index, :create, :edit, :update, :destroy]
+    resources :brands, only: [:index, :create, :edit, :update, :destroy]
+    resources :products, only: [:index, :create, :edit, :update, :destroy]
+    resources :reviews, only: [:index, :show, :edit, :update, :destroy]
+    resources :users, only: [:index, :show, :edit, :update]
+  end
+
+
+  # scope module: :user do
+  #   get 'users/quit' => 'users#quit'
+  #   patch 'users/withdraw' => 'users#withdraw'
+  #   resources :users, only: [:show, :edit, :update]do
+  #     get :bookmarks, on: :member
+  #   end
+  # end
 
    # ゲストユーザー用のルーティング
   devise_scope :user do

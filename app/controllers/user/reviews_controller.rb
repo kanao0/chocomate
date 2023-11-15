@@ -1,6 +1,7 @@
 class User::ReviewsController < ApplicationController
   # edit,updateアクション前にensure_correct_user実行
   before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:edit, :update]
 
   def new
     @review = Review.new
@@ -22,12 +23,19 @@ class User::ReviewsController < ApplicationController
   end
 
   def index
-    @reviews = Review.all
+    @reviews = Review.all.page(params[:page]).per(3)
     # paramsにtag_nameが含まれているときそのtagがついてるレビューを表示
+    # if params[:tag_name]
+    #   @tag =Tag.find_by(name: params[:tag_name])
+    #   @reviews = @tag.reviews
+    # end
     if params[:tag_name]
-      @tag =Tag.find_by(name: params[:tag_name])
-      @reviews = @tag.reviews
+      @tag = Tag.find_by(name: params[:tag_name])
+      @reviews = @tag.reviews.page(params[:page]).per(3)
+    else
+      @reviews = Review.all.page(params[:page]).per(3)
     end
+
     # t
     @tag_list = Tag.all
   end
@@ -35,9 +43,7 @@ class User::ReviewsController < ApplicationController
   def show
     @review = Review.find(params[:id])
     @review_comment = ReviewComment.new
-    # t
     @review_tags = @review.tags
-
   end
 
   def edit
@@ -66,6 +72,11 @@ class User::ReviewsController < ApplicationController
     redirect_to user_path(@user)
   end
 
+  def search
+    @reviews = Review.where(product_id: params[:search][:product]).order(created_at: :desc).page(params[:page]).per(3)
+    render :index
+  end
+
   private
   def review_params
     params.require(:review).permit(:user_id, :product_id, :rate, :image, :body)
@@ -77,7 +88,7 @@ class User::ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @user = current_user
     unless @review.user == @user
-      redirect_to user_path(@user)
+      redirect_to user_path(current_user.id)
     end
   end
 
