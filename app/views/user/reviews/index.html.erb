@@ -35,7 +35,7 @@
                 <%= link_to review.user.name , user_path(review.user.id) %>
               </td>
               <td><%= review.product.name %></td>
-              <td><%= truncate(review.body, length: 15) %></td>
+              <td><%= truncate(review.body, length: 23) %></td>
               <td>
                 <!--タグ-->
                 <% review.tags.each do |tag| %>

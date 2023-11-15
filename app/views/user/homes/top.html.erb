@@ -1,26 +1,54 @@
-がぞうどーん
-新着レビュー
 <div class="container">
   <div class="row">
-    <div class="col-3 mb-4">
-      <div class="border p-3">
-          <h4>あ</h4>
-      </div>
-    </div>
-    <div class="col-3 mb-4">
-      <div class="border p-3">
-          <h4>い</h4>
-      </div>
-    </div>
-    <div class="col-3 mb-4">
-      <div class="border p-3">
-          <h4>う</h4>
-      </div>
-    </div>
-    <div class="col-3 mb-4">
-      <div class="border p-3">
-          <h4>え</h4>
-      </div>
+    <div class="col">
+     < TOP画像＆説明(About)どーん >
     </div>
   </div>
 </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4>新着レビュー</h4>
+    </div>
+  </div>
+  <div class="row">
+    <% @reviews.each do |review| %>
+      <div class="col-12 col-md-3 mb-4 mx-auto">
+        <div class="border p-3">
+          <%= link_to review_path(review.id) do %>
+            <%= image_tag review.get_image(200, 200) %>
+          <% end %><br>
+          <%= review.product.name %><br>
+          <%= render "user/reviews/static_rate", review: review %><br>
+          <%= image_tag review.user.get_profile_image(50,50) %>
+          <%= truncate(review.body, length: 23) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+
+
+
+  <!--  <div class="col-3 mb-4">-->
+  <!--    <div class="border p-3">-->
+  <!--        <h4>い</h4>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--  <div class="col-3 mb-4">-->
+  <!--    <div class="border p-3">-->
+  <!--        <h4>う</h4>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--  <div class="col-3 mb-4">-->
+  <!--    <div class="border p-3">-->
+  <!--        <h4>え</h4>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--</div>-->
+  <!--</div>-->
