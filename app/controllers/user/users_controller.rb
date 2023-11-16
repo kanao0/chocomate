@@ -24,7 +24,6 @@ class User::UsersController < ApplicationController
   def bookmarks
     @user = User.find(current_user.id)
     @bookmark_reviews = @user.bookmarks
-    # @reviews = @user.bookmarks.review
   end
 
   def quit

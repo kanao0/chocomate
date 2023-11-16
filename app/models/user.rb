@@ -27,7 +27,6 @@ class User < ApplicationRecord
     end
   end
 
-
   # プロフィールイメージの設定(呼び出すとき引数必要!)
   def get_profile_image(width, height)
     unless profile_image.attached?
