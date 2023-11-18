@@ -2,11 +2,12 @@
   <div class="row">
     <div class="col d-flex justify-content-between">
       <h4 class="mr-3">レビュー詳細</h4>
-      <!-- ブックマーク -->
-      <div id="bookmark_btn_<%= @review.id %>">
-        <%= render "bookmark", review: @review %>
-      </div>
-
+      <!-- ブックマーク（ログインしてなかったら非表示） -->
+      <% if user_signed_in? %>
+        <div id="bookmark_btn_<%= @review.id %>">
+          <%= render "bookmark", review: @review %>
+        </div>
+      <% end %>
     </div>
   </div>
 
@@ -45,48 +46,36 @@
           <% end %>
         </li>
       <h6>レビュー本文</h6>
-      <div><%= @review.body %></div
+      <div><%= @review.body %></div>
       <% if @review.user == current_user %>
-          <td><%= link_to "編集", edit_review_path, class: "btn btn-sm btn-success" %></td>
-          <td><%= link_to "削除", review_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+        <%= link_to "編集", edit_review_path, class: "btn btn-sm btn-success" %>
+        <%= link_to "削除", review_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
       <% end %>
     </div>
   </div>
 </div>
 
-
-
 <div class="container">
   <div class="row">
-    <div class="col-3">
-          <!--コメント欄ここ-->
-      <p>コメント件数：<%= @review.review_comments.count %></p>
-      <% @review.review_comments.each do |review_comment| %>
+    <div class="col mx-auto">
+      <!-- コメント関係 -->
+      <div class="border p-3"> <!-- 枠で囲む部分 -->
+        <!-- コメント件数 -->
+        <p>コメント件数：<span id="comment_count"><%= @review.review_comments.count %></span></p>
+        <div class="row" id="review-comments">
+          <!--コメント一覧-->
+        <%= render "user/review_comments/index", review: @review %>
 
-        <%=link_to user_path(review_comment.user.id) do  %>
-          <div><%= image_tag review_comment.user.get_profile_image(100,100) %></div>
-          <div><%= review_comment.user.name %></div>
-        <% end %>
-    <div class="col-4">
-      <%= review_comment.created_at.strftime('%Y/%m/%d') %><%= review_comment.comment %>
-    </div>
-
-        <!--レビューコメントの削除-->
-        <% if review_comment.user == current_user %>
-          <%= link_to "削除", review_review_comment_path(@review,review_comment), method: :delete, data: { confirm: '削除しますか？' }, class: "btn btn-sm btn-danger" %>
-        <% end %><br>
-      <% end %>
-    </div>
-    <div class="col">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-6 mx-auto">
-      <!--コメント投稿フォーム-->
-      <%= form_with model: [@review, @review_comment] do |f| %>
-        <%= f.text_area :comment, rows: '5', placeholder: "コメント"  %>
-        <%= f.submit "送信する" %>
-      <% end %>
+        </div>
+        <div class="row">
+          <div class="col mx-auto" id="post-comments">
+            <!--コメント投稿フォーム(ログインしてなかったら非表示)-->
+            <% if user_signed_in? %>
+              <%= render "user/review_comments/form" , { review: @review , review_comment: @review_comment } %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -13,16 +13,8 @@ class User::ReviewCommentsController < ApplicationController
     @review_comment = ReviewComment.find(params[:id])
     @user = current_user
     @review_comment.destroy
-    redirect_to review_path(review)  
+    redirect_to review_path(review)
   end
-  
-# def destroy
-#   puts "Destroy Action - params[:id]: #{params[:id]}"
-#   @review_comment = ReviewComment.find(params[:id])
-#   @user = current_user
-#   @review_comment.destroy
-#   redirect_to review_path(@review_comment)
-# end  
 
   private
 

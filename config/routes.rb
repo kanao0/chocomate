@@ -29,12 +29,15 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get 'homes/top'
+    get 'reviews/search' => 'reviews#search'
+    resources :users, only: [:index, :show, :edit, :update]
     resources :origins, only: [:index, :create, :edit, :update, :destroy]
     resources :types, only: [:index, :create, :edit, :update, :destroy]
     resources :brands, only: [:index, :create, :edit, :update, :destroy]
     resources :products, only: [:index, :create, :edit, :update, :destroy]
-    resources :reviews, only: [:index, :show, :edit, :update, :destroy]
-    resources :users, only: [:index, :show, :edit, :update]
+    resources :reviews, only: [:index, :show, :edit, :update, :destroy] do
+      resources :review_comments, only: [:destroy]
+    end
   end
 
 

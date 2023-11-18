@@ -1,0 +1,3 @@
+$('#review-comments').html("<%= j(render "/user/review_comments/index", review: @review) %>");
+$('#review_count').html("<%= @review.review_comments.count %>")
+$("textarea").val('');

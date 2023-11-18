@@ -10,10 +10,10 @@
       </h2>
 
       <div class="my-3">
-        < %= form_tag(reviews_search_path, method: :get) do %>
-          < %= collection_select(:search, :product, Product.all, :id, :name) %>
-          < %= submit_tag '検索', name: nil %>
-        < % end %>
+        <%= form_tag(admin_reviews_search_path, method: :get) do %>
+          <%= collection_select(:search, :product, Product.all, :id, :name) %>
+          <%= submit_tag '検索', name: nil %>
+        <% end %>
       </div>
 
       <table class="table">

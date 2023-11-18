@@ -45,6 +45,7 @@ class Review < ApplicationRecord
   # 現在ログインしているユーザーがブックマーク登録しているかどうか判断するためのメソッド
   # find_byでuser_idとuser.idが一致するbookmarksを探し、なければnilを返す
   def find_bookmark(user)
+    return nil if user.nil?
       bookmarks.find_by(user_id: user.id)
   end
 
