@@ -21,12 +21,17 @@
       <% end %>
       </div>
     </div>
-    <div class="col-6">
+  <div class="row">
+    <div class="col-md-11 offset-md-1">
       <h5><%= @review.product.name %></h5>
           <!--投稿日-->
-      <h6><%= @review.created_at.strftime('%Y/%m/%d') %></h6><br>
+      <h6><%= @review.created_at.strftime('%Y/%m/%d') %></h6>
           <!--星評価-->
-          <%= render "user/reviews/static_rate", review: @review %><br>
+      <div>
+          <%= render "user/reviews/static_rate", review: @review %>
+      </div>
+      
+      <ul>
         <li>ブランド：
           <%= @review.product.brand.name %>
         </li>
@@ -45,43 +50,32 @@
             <%= link_to tag.name, reviews_path(tag_name: tag.name) %>
           <% end %>
         </li>
+      </ul>
+      
       <h6>レビュー本文</h6>
       <div><%= @review.body %></div>
-          <%= link_to "編集", edit_review_path, class: "btn btn-sm btn-success" %>
-          <%= link_to "削除", admin_review_path(@review), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+      <%= link_to "レビューを削除", admin_review_path(@review), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
     </div>
   </div>
 </div>
 
 
-
 <div class="container">
-  <div class="row">
-    <div class="col-3">
-          <!--コメント欄ここ-->
-      <p>コメント件数：<%= @review.review_comments.count %></p>
-      <% @review.review_comments.each do |review_comment| %>
-
-        <%=link_to user_path(review_comment.user.id) do  %>
-          <div><%= image_tag review_comment.user.get_profile_image(100,100) %></div>
-          <div><%= review_comment.user.name %></div>
-        <% end %>
-    <div class="col-4">
-      <%= review_comment.created_at.strftime('%Y/%m/%d') %><%= review_comment.comment %>
-    </div>
-        <!--レビューコメントの削除-->
-          <%= link_to "削除", admin_review_review_comment_path(@review,review_comment), method: :delete, data: { confirm: '削除しますか？' }, class: "btn btn-sm btn-danger" %>
-      <% end %>
-    </div>
-    <div class="col">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-6 mx-auto">
-        <%= form_with model: [@review, @review_comment] do |f| %>
-          <%= f.text_area :comment, rows: '5', placeholder: "コメント"  %>
-          <%= f.submit "送信する" %>
-        <% end %>
+  <!-- コメント関係 -->
+  <div class="card"> <!-- 枠で囲む部分 -->
+    <div class="card-body">
+      <!-- コメント件数 -->
+      <p>コメント件数：<span id="comment_count"><%= @review.review_comments.count %></span></p>
+      <div id="review-comments">
+        <!--コメント一覧-->
+        <%= render "admin/review_comments/index", review: @review %>
+      </div>
+      <!--
+      <div class="row">
+        <div class="col mx-auto">
+        </div>
+      </div>
+      -->
     </div>
   </div>
 </div>

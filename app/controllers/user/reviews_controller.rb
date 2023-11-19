@@ -23,7 +23,7 @@ class User::ReviewsController < ApplicationController
   end
 
   def index
-    @reviews = Review.all.page(params[:page]).per(3)
+    #@reviews = Review.all.page(params[:page]).per(1)
     # paramsにtag_nameが含まれているときそのtagがついてるレビューを表示
     # if params[:tag_name]
     #   @tag =Tag.find_by(name: params[:tag_name])
@@ -33,7 +33,7 @@ class User::ReviewsController < ApplicationController
       @tag = Tag.find_by(name: params[:tag_name])
       @reviews = @tag.reviews.page(params[:page]).per(3)
     else
-      @reviews = Review.all.page(params[:page]).per(3)
+      @reviews = Review.all.page(params[:page]).per(1)
     end
 
     # t

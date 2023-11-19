@@ -16,7 +16,7 @@
     <% @reviews.each do |review| %>
       <div class="col-12 col-md-3 mb-4 mx-auto">
         <div class="border p-3">
-          <%= link_to review_path(review.id) do %>
+          <%= link_to (admin_signed_in? ? admin_review_path(review.id) : review_path(review.id)) do %>
             <%= image_tag review.get_image(200, 200) %>
           <% end %><br>
           <%= review.product.name %><br>
@@ -26,5 +26,5 @@
         </div>
       </div>
     <% end %>
-  </div>
+  </div>  
 </div>

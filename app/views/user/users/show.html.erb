@@ -19,22 +19,28 @@
         </tr>
       </table>
       <div>レビュー数：  <%= @user.reviews.count %></div>
+
+
     <% if current_user == @user %>
       <div class='row'>
-        <!--ブックマークページへ-->
-        <%= link_to bookmarks_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
-          <i class="fas fa-bookmark"></i>
-        <% end %>
-        <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
-          <i class="fas fa-user-cog"></i>
+        <% unless @user.guest_user? %>
+          <%= link_to bookmarks_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
+            <i class="fas fa-bookmark"></i>
+          <% end %>
+
+          <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
+            <i class="fas fa-user-cog"></i>
+          <% end %>
+        <% else %>
+          <%= link_to bookmarks_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
+            <i class="fas fa-bookmark"></i>
+          <% end %>
         <% end %>
       </div>
     <% end %>
-    </div>
-
+  </div>
     <div class='col-md-8 offset-md-1'>
       <h4><%= @user.name %> さんのレビュー一覧</h4>
-      <!-- レビューがどーんと並ぶ -->
       <table class="table">
         <thead>
           <tr>
@@ -55,7 +61,7 @@
                 <%= link_to "編集", edit_review_path(review.id), class: "btn btn-sm btn-success" %>
                 <%= link_to "削除", review_path(review.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
               <% end %><br>
-               <%= link_to ">> Read more", review_path(review.id) %>
+                <%= link_to ">> Read more", (admin_signed_in? ? admin_review_path(review.id) : review_path(review.id)) %>
               </td>
             </tr>
           <% end %>

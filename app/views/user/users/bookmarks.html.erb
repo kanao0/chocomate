@@ -18,9 +18,9 @@
               <td><%= image_tag bookmark.review.get_image(150, 150) %></td>
               <td><%= bookmark.review.product.name %></td>
               <td><%= render "user/reviews/static_rate", review: bookmark.review %></td>
-              <!--<td id="bookmark_btn_<%= bookmark.review.id %>">-->
-              <!--    < %= render "users/reviews/bookmark", review: bookmark.review %>-->
-              <!--</td>-->
+              <td id="bookmark_btn_<%= bookmark.review.id %>">
+                  <%= render "user/reviews/bookmark", review: bookmark.review %>
+              </td>
               <td>
                <%= link_to ">> Read more", review_path(bookmark.review.id) %>
               </td>

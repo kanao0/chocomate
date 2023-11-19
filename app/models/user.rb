@@ -26,6 +26,11 @@ class User < ApplicationRecord
       user.bio = "これはゲストユーザーです"
     end
   end
+  
+  # メールアドレスがゲストユーザーのものであるかの判定
+  def guest_user?
+    email == GUEST_USER_EMAIL
+  end  
 
   # プロフィールイメージの設定(呼び出すとき引数必要!)
   def get_profile_image(width, height)
