@@ -1,21 +1,21 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-     < TOP画像＆説明(About) >
-    </div>
+<div class="main_visual">
+  <%= image_tag 'main_visual2.jpg', alt: 'Image', width: '100%', height: '100%' %>
+  <div class="text-overlay">
+    <p>
+      チョコレートの奥深さを探し<br>
+    新たなお気に入りを見つけよう
+    </p>
   </div>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h4>新着レビュー</h4>
-    </div>
+<div class="container mt-5">
+  <div class="d-flex justify-content-center">
+      <h4>New Review</h4>
   </div>
   <div class="row">
     <% @reviews.each do |review| %>
       <div class="col-12 col-md-3 mb-4 mx-auto">
-        <div class="border p-3">
+        <div>
           <%= link_to (admin_signed_in? ? admin_review_path(review.id) : review_path(review.id)) do %>
             <%= image_tag review.get_image(200, 200) %>
           <% end %><br>
@@ -26,5 +26,5 @@
         </div>
       </div>
     <% end %>
-  </div>  
+  </div>
 </div>

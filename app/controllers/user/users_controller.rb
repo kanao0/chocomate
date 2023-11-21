@@ -23,7 +23,7 @@ class User::UsersController < ApplicationController
 
   def bookmarks
     @user = User.find(current_user.id)
-    @bookmark_reviews = @user.bookmarks
+    @bookmark_reviews = @user.bookmarks.page(params[:page]).per(10)
   end
 
   def quit

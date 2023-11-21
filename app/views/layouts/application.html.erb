@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <link href="https://fonts.googleapis.com/css2?family=" rel="stylesheet">
   <head>
     <title>Chocomate</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -7,91 +8,13 @@
     <%= csp_meta_tag %>
 
     <script src="https://kit.fontawesome.com/19ed3027dd.js" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #6a2f36;">
-        <div class="container">
-          <div class="d-flex">
-            <a class="navbar-brand" href="/"><%= image_tag 'logo.png', :size =>'75x75' %></a>
-            <% if user_signed_in? %>
-              <div class="nav-item text-light my-auto ml-4">
-                ようこそ、<%= current_user.name %>さん！
-              </div>
-            <% end %>
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-              <% if user_signed_in? %>
-                <li class="nav-item">
-                  <%= link_to 'マイページ', user_path(current_user), class: 'nav-link text-light m-2' %>
-                </li>
-
-                <li class="nav-item">
-                  <%= link_to "レビューを見る", reviews_path, class: 'nav-link text-light m-2' %>
-                </li>
-
-                <li class="nav-item">
-                  <%= link_to "レビュー投稿", new_review_path, class: 'nav-link text-light m-2' %>
-                </li>
-
-                <li class="nav-item">
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-light m-2' %>
-                </li>
-
-              <% elsif admin_signed_in? %>
-                <li class="nav-item">
-                  <%= link_to "商品一覧", admin_products_path, class: 'nav-link text-light m-2' %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "種類一覧", admin_types_path, class: 'nav-link text-light m-2' %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "産地一覧", admin_origins_path, class: 'nav-link text-light m-2' %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "ブランド一覧", admin_brands_path, class: 'nav-link text-light m-2' %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "レビューを見る", admin_reviews_path, class: 'nav-link text-light m-2' %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "会員一覧", admin_users_path, class: 'nav-link text-light m-2' %>
-                </li>
-                <li class="nav-item">
-                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-light m-2' %>
-                </li>
-
-              <% else %>
-
-                <li class="nav-item ">
-                  <%= link_to "レビューを見る", reviews_path, class: 'nav-link text-light m-2' %>
-                </li>
-
-                <li class="nav-item">
-                  <%= link_to "ゲストログイン", user_guest_sign_in_path, method: :post, class: 'nav-link text-light m-2' %>
-                </li>
-
-                <li class="nav-item">
-                  <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-light m-2' %>
-                </li>
-
-                <li class="nav-item">
-                  <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-light m-2' %>
-                </li>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-
+    <%= render "layouts/header" %>
     <main class="pb-5">
       <row>
         <div class="d-flex justify-content-center mt-3">
@@ -103,14 +26,6 @@
       </row>
 
     <%= yield %>
-    <footer class='fixed-bottom text-light' style="background-color: #6a2f36;">
-      <div class="container">
-      	<div class='row'>
-        	<div class='mx-auto my-2'>
-        		<h5>chocomate!</h5>
-        	</div>
-        </div>
-      </div>
-    </footer>
+    <%= render "layouts/footer" %>
   </body>
 </html>

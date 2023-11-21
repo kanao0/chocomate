@@ -1,36 +1,43 @@
 <div class="container">
-  <div class="row">
-    <div class='col-12'>
-      <h4><%= @user.name %> さんのブックマーク一覧</h4>
-      <table class="table">
-        <thead>
-          <tr>
-            <th></th>
-            <th>商品名</th>
-            <th>レビュー</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @bookmark_reviews.each do |bookmark| %>
-            <tr>
-              <td><%= image_tag bookmark.review.get_image(150, 150) %></td>
-              <td><%= bookmark.review.product.name %></td>
-              <td><%= render "user/reviews/static_rate", review: bookmark.review %></td>
-              <td id="bookmark_btn_<%= bookmark.review.id %>">
-                  <%= render "user/reviews/bookmark", review: bookmark.review %>
-              </td>
-              <td>
-               <%= link_to ">> Read more", review_path(bookmark.review.id) %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+  <div class="mb-4">
+    <h4>
+      <%= @user.name %> さんのブックマーク一覧
+    </h4>
+  </div>
+  <% @bookmark_reviews.each do |bookmark| %>
+    <div class="row my-3">
+      <div class="col-sm-2">
+        <%= image_tag bookmark.review.get_image(200, 200), style: "width:100%;" %>
+      </div>
+      <div class="col-sm-10">
+        <div class="row">
+          <div class="col-md-6">
+            <%= bookmark.review.product.name %>
+          </div>
+          <div class="col-md-6 d-flex">
+            <span class="mr-2"><%= bookmark.review.rate %>点</span>
+            <%= render "user/reviews/static_rate", review: bookmark.review %>
+              <div id="bookmark_btn_<%= bookmark.review.id %>">
+              <%= render "user/reviews/bookmark", review: bookmark.review %>
+              </div>
+          </div>
+
+        <div>
+          user: <%= link_to bookmark.review.user.name , user_path(bookmark.review.user.id) %>
+        </div>
+        <div>
+          review: <%= truncate(bookmark.review.body, length: 23) %>
+          <%= link_to ">> Read more", review_path(bookmark.review.id) %>
+        </div>
+        <% bookmark.review.tags.each do |tag| %>
+          <i class="fa-sharp fa-solid fa-tag"></i>
+          <%= link_to tag.name, reviews_path(tag_name: tag.name) %>
+        <% end %>
+      </div>
     </div>
-    <div class="row mx-auto">
-       <%= link_to "マイページに戻る", user_path(@user), class: "btn btn-outline-secondary btn-block" %>
-    </div>
+  <% end %>
+  <div class="d-flex justify-content-center">
+    <%= paginate @bookmark_reviews, theme: 'bootstrap-5' %>
+    <%= link_to "マイページに戻る", user_path(@user), class: "btn btn-outline-secondary btn-block" %>
   </div>
 </div>

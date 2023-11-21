@@ -1,5 +1,50 @@
 @use '~bootstrap/scss/bootstrap';
 
+$primary: #6c3524;
+$secondary: #cda16f;
+$success: #6c3524;
+$info: #cc0000;
+// $warning: #c06378;
+$danger: #d22833;
+// $light:
+// $dark: #EDE4E0;
+
+// Bootstrapをインポート
+@import 'bootstrap/scss/bootstrap';
+
+
 .navbar-toggler{
-  background-color: #ffffff;
+  outline: none;
 }
+
+header {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+body {
+  background-color: #F8F6F2;
+}
+
+.pagination>li>a {
+  border: none;     /*枠線をなくす*/
+  color: #696969;   /*文字の色を変える*/
+}
+
+// トップページメインビジュアル
+  .main_visual {
+    position: relative;
+  }
+
+  .text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+  }
+
+  .text-overlay p {
+    font-size: 50px;
+    margin: 10px 0;
+  }

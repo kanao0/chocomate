@@ -40,7 +40,7 @@
     <% end %>
   </div>
     <div class='col-md-8 offset-md-1'>
-      <h4><%= @user.name %> さんのレビュー一覧</h4>
+      <h4><%= @user.name %> さんのレビュー</h4>
       <table class="table">
         <thead>
           <tr>
@@ -58,8 +58,8 @@
               <td><%= render "user/reviews/static_rate", review: review %></td>
               <td>
               <% if review.user == current_user %>
-                <%= link_to "編集", edit_review_path(review.id), class: "btn btn-sm btn-success" %>
-                <%= link_to "削除", review_path(review.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+                <span><%= link_to "編集", edit_review_path(review.id), class: "btn btn-sm btn-success" %>
+                <%= link_to "削除", review_path(review.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></span>
               <% end %><br>
                 <%= link_to ">> Read more", (admin_signed_in? ? admin_review_path(review.id) : review_path(review.id)) %>
               </td>

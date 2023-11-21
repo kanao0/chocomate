@@ -3,11 +3,6 @@ class Admin::ReviewsController < ApplicationController
 
   def index
     @reviews = Review.all.page(params[:page]).per(3)
-    # paramsにtag_nameが含まれているときそのtagがついてるレビューを表示
-    # if params[:tag_name]
-    #   @tag =Tag.find_by(name: params[:tag_name])
-    #   @reviews = @tag.reviews
-    # end
     if params[:tag_name]
       @tag = Tag.find_by(name: params[:tag_name])
       @reviews = @tag.reviews.page(params[:page]).per(3)
@@ -22,12 +17,6 @@ class Admin::ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @review_comment = ReviewComment.new
     @review_tags = @review.tags
-  end
-
-  def edit
-  end
-
-  def update
   end
 
   def destroy
