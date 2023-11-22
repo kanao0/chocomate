@@ -7,7 +7,7 @@ $info: #cc0000;
 // $warning: #c06378;
 $danger: #d22833;
 // $light:
-// $dark: #EDE4E0;
+$dark: #3e2e28;
 
 // Bootstrapをインポート
 @import 'bootstrap/scss/bootstrap';
@@ -45,6 +45,29 @@ body {
   }
 
   .text-overlay p {
-    font-size: 50px;
+    font-size: clamp(20px, calc(1.875rem + ((1vw - 7.68px) * 3.9063)), 50px);
     margin: 10px 0;
+    white-space: nowrap;
   }
+
+  div[id^="top_star"] img {
+    width: 16px;
+    height: auto;
+}
+
+// 詳細ページ商品名
+.product-name {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+// 詳細ページ点数の色
+.rate-styled {
+  color: #FFC800;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.font-small {
+  font-size: 0.74em;
+}

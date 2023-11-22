@@ -16,16 +16,19 @@
   <body>
     <%= render "layouts/header" %>
     <main class="pb-5">
-      <row>
+      <% if notice.present? %>
         <div class="d-flex justify-content-center mt-3">
           <p class="notice alert-info px-3" role="alert"><%= notice %></p>
         </div>
+      <% end %>
+      <% if alert.present? %>
         <div class="d-flex justify-content-center">
           <p class="arlet alert-danger px-3" role="alert"><%= alert %></p>
         </div>
-      </row>
+      <% end %>
 
     <%= yield %>
+    </main>  
     <%= render "layouts/footer" %>
   </body>
 </html>

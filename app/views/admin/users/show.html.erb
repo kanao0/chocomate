@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row d-flex justify-content-center">
-    <h5 class="border p-3 my-3">
+    <h5 class="border-bottom p-3 my-3 border-bottom-2">
       <%= @user.name %>さんの会員詳細
     </h5>
   </div>
   <div class="row d-flex justify-content-center">
     <div>
-      <table class="table table-borderless">
+      <table class="table table-border">
         <tr>
           <td class="bd-light">会員ID</td>
           <td><%= @user.id %></td>
@@ -20,7 +20,7 @@
           <td class="bd-light">メールアドレス</td>
           <td><%= @user.email %></td>
         </tr>
-
+        
         <tr>
           <td class="bd-light">会員ステータス</td>
           <td>
@@ -37,7 +37,7 @@
 
   <div class="d-flex justify-content-center p-3 my-3">
     <%= link_to "編集する", edit_admin_user_path, class:"btn btn-success ml-3" %>
-    <%= link_to "会員一覧に戻る", admin_users_path, class:"btn btn-primary ml-3" %>
+    <%= link_to "会員一覧に戻る", admin_users_path, class:"btn btn-outline-primary ml-3" %>
   </div>
 
 </div>

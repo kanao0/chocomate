@@ -1,12 +1,12 @@
 <div class="container">
   <div class="mb-4">
-    <h2>みんなのレビューチョコ
+    <h4>みんなのレビューチョコ
     <% if @tag.present? %>
     <i class="fa-sharp fa-solid fa-tag"></i>
       <%= @tag.name %>
       (全<%= @tag.reviews.count %>件)
     <% end %>
-    </h2>
+    </h4>
 
     <div class="my-3">
       <%= form_tag(reviews_search_path, method: :get) do %>
