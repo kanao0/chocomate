@@ -1,18 +1,20 @@
-<div class="container">
-  <div class="row">
+<div class="container mb-5">
+  <div class="row mt-4">
     <h4>レビュー詳細</h4>
   </div>
-      <!-- ブックマーク（ログインしてなかったら非表示） -->
+  <div class="row">
+    <div class="col-md-6">
+      <%= image_tag @review.get_image(300, 300) %>
+    </div>
+    <div class="col-md-6">
+                <!--投稿日-->
+      <div><%= @review.created_at.strftime('%Y/%m/%d') %></div>
+            <!-- ブックマーク（ログインしてなかったら非表示） -->
       <% if user_signed_in? %>
-        <div id="bookmark_btn_<%= @review.id %>">
+        <div id="bookmark_btn_<%= @review.id %>" class="text-right">
           <%= render "bookmark", review: @review %>
         </div>
       <% end %>
-  <div class="row">
-    <div class="col-6">
-      <%= image_tag @review.get_image(300, 300) %>
-    </div>
-    <div class="col-6">
       <h5 class="product-name"><%= @review.product.name %></h5>
       <!--星評価-->
       <div class="d-flex align-items-center">
@@ -42,46 +44,35 @@
       <h6>～ レビュー ～</h6>
       <div><%= @review.body %></div>
     </div>
-  </div>    
-          <!--レビューしたユーザーのプロフィールイメージ-->
-      <%=link_to user_path(@review.user.id) do  %>
-        <div><%= image_tag @review.user.get_profile_image(150,150) %></div>
-        <div><%= @review.user.name %></div>
-      <% end %>
-      </div>
+  </div>
+  <div class="row mt-4 mb-4">
+    <div class="col-md-6">
+      <%= link_to user_path(@review.user.id) do  %>
+          <%= image_tag @review.user.get_profile_image(150,150) %><br>
+          user: <%= @review.user.name %>
+      <% end %>     
     </div>
-      
-          <!--投稿日-->
-      <h6><%= @review.created_at.strftime('%Y/%m/%d') %></h6><br>
-
-
+    <div class="col-md-6">
       <% if @review.user == current_user %>
         <%= link_to "編集", edit_review_path, class: "btn btn-sm btn-success" %>
         <%= link_to "削除", review_path, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %>
-      <% end %>
+      <% end %> 
+    </div>
   </div>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col mx-auto">
-      <!-- コメント関係 -->
-      <div class="border p-3"> <!-- 枠で囲む部分 -->
+  
+  <div class="card"> 
+    <div class="card-body">
         <!-- コメント件数 -->
-        <p>コメント件数：<span id="comment_count"><%= @review.review_comments.count %></span></p>
-        <div class="row" id="review-comments">
-          <!--コメント一覧-->
+      <p>コメント件数：<span id="comment_count"><%= @review.review_comments.count %></span></p>
+      <div id="review-comments">
+        <!--コメント一覧-->
         <%= render "user/review_comments/index", review: @review %>
-
-        </div>
-        <div class="row">
-          <div class="col mx-auto" id="post-comments">
-            <!--コメント投稿フォーム(ログインしてなかったら非表示)-->
-            <% if user_signed_in? %>
-              <%= render "user/review_comments/form" , { review: @review , review_comment: @review_comment } %>
-            <% end %>
-          </div>
-        </div>
+      </div>
+      <div id="post-comments">
+        <!--コメント投稿フォーム(ログインしてなかったら非表示)-->
+        <% if user_signed_in? %>
+          <%= render "user/review_comments/form" , { review: @review , review_comment: @review_comment } %>
+        <% end %>
       </div>
     </div>
   </div>

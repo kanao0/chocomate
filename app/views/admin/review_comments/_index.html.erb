@@ -12,7 +12,7 @@
       <div>
         <%= review_comment.created_at.strftime('%Y/%m/%d') %>
       </div>
-      <div class="">
+      <div>
         <span class="text-truncate"><%= review_comment.comment %></span>
         <!-- レビューコメントの削除 -->
         <%= link_to "削除", admin_review_review_comment_path(@review, review_comment), method: :delete, remote:true, data: {"turbolinks" => false}, class: "btn btn-sm btn-danger" %>

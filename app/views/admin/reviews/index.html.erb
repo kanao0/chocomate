@@ -33,7 +33,7 @@
           </div>
         </div>
         <div>
-          user: <%= link_to review.user.name , admin_user_path(review.user.id) %>
+          user: <%= link_to review.user.name , user_path(review.user.id) %>
         </div>
         <div>
           review: <%= truncate(review.body, length: 23) %>

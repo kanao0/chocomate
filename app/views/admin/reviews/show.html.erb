@@ -1,37 +1,26 @@
 <div class="container">
+  <div class="row mt-4">
+    <h4>レビュー詳細</h4>
+  </div>
   <div class="row">
-    <div class="col d-flex justify-content-between">
-      <h4 class="mr-3">レビュー詳細</h4>
-      <!-- ブックマーク（ログインしてなかったら非表示） -->
+    <div class="col-md-6">
+      <%= image_tag @review.get_image(300, 300) %>
+    </div>
+    <div class="col-md-6">
+                <!--投稿日-->
+      <div><%= @review.created_at.strftime('%Y/%m/%d') %></div>
+            <!-- ブックマーク（ログインしてなかったら非表示） -->
       <% if user_signed_in? %>
-        <div id="bookmark_btn_<%= @review.id %>">
+        <div id="bookmark_btn_<%= @review.id %>" class="text-right">
           <%= render "bookmark", review: @review %>
         </div>
       <% end %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-3">
-      <div class="mb-3"> <%= image_tag @review.get_image(250, 250) %></div>
-          <!--レビューしたユーザーのプロフィールイメージ-->
-      <%=link_to user_path(@review.user.id) do  %>
-        <div><%= image_tag @review.user.get_profile_image(150,150) %></div>
-        <div><%= @review.user.name %></div>
-      <% end %>
+      <h5 class="product-name"><%= @review.product.name %></h5>
+      <!--星評価-->
+      <div class="d-flex align-items-center">
+        <%= render "user/reviews/static_rate", review: @review %>
+        <span class="ml-2 rate-styled"><%= @review.rate %></span>
       </div>
-    </div>
-  <div class="row">
-    <div class="col-md-11 offset-md-1">
-      <h5><%= @review.product.name %></h5>
-          <!--投稿日-->
-      <h6><%= @review.created_at.strftime('%Y/%m/%d') %></h6>
-          <!--星評価-->
-      <div>
-          <%= render "user/reviews/static_rate", review: @review %>
-          <%= @review.rate %>点
-      </div>
-      
       <ul>
         <li>ブランド：
           <%= @review.product.brand.name %>
@@ -48,22 +37,28 @@
         <li>タグ：
           <% @review_tags.each do |tag| %>
           <i class="fa-sharp fa-solid fa-tag"></i>
-            <%= link_to tag.name, reviews_path(tag_name: tag.name) %>
+            <%= link_to tag.name, admin_reviews_path(tag_name: tag.name) %>
           <% end %>
         </li>
-      </ul>
-      
-      <h6>レビュー本文</h6>
+      </ul>    
+      <h6>～ レビュー ～</h6>
       <div><%= @review.body %></div>
-      <%= link_to "レビューを削除", admin_review_path(@review), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
     </div>
   </div>
-</div>
+  <div class="row mt-4 mb-4">
+    <div class="col-md-6">
+      <%=link_to user_path(@review.user.id) do  %>
+        <div><%= image_tag @review.user.get_profile_image(150,150) %></div>
+        <div>user: <%= @review.user.name %></div>
+      <% end %>  
+    </div>
+    <div class="col-md-6">
+        <%= link_to "レビューを削除", admin_review_path(@review), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%>
+        <%= link_to "会員詳細へ", admin_user_path(@review.user.id), class: "btn btn-sm btn-outline-primary ml-3"%>
+    </div>
+  </div>
 
-
-<div class="container">
-  <!-- コメント関係 -->
-  <div class="card"> <!-- 枠で囲む部分 -->
+  <div class="card"> 
     <div class="card-body">
       <!-- コメント件数 -->
       <p>コメント件数：<span id="comment_count"><%= @review.review_comments.count %></span></p>
