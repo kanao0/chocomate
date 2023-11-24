@@ -4,7 +4,7 @@ class User::ReviewCommentsController < ApplicationController
     comment = current_user.review_comments.new(review_comment_params)
     comment.review_id = @review.id
     comment.save
-    # redirect_to review_path(review)
+    
   end
 
 
@@ -13,7 +13,7 @@ class User::ReviewCommentsController < ApplicationController
     @review_comment = ReviewComment.find(params[:id])
     @user = current_user
     @review_comment.destroy
-    # redirect_to review_path(review)
+    
   end
 
   private

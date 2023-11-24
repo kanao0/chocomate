@@ -17,7 +17,7 @@
   <div>
     <%= f.text_field :name, value: @tag_list,class: "form-control"%>
   </div>
-  <!--星評価ここから-->
+  <!--星評価-->
   <% if @review.id.nil? %>
     <div class="form-group" id="star">
       <%= f.label :rate,"星評価(1.0～5.0)" %>
@@ -45,7 +45,7 @@
       <%= render "static_rate", review: @review %>
     </div>
   <% end %>
-  <!--星評価ここまで-->
+
   <div>
     <% if @review.new_record? %>
       <%= f.submit "レビューを投稿する", class:"btn btn-success" %>

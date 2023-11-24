@@ -2,12 +2,11 @@ class Admin::ReviewsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @reviews = Review.all.page(params[:page]).per(3)
     if params[:tag_name]
       @tag = Tag.find_by(name: params[:tag_name])
-      @reviews = @tag.reviews.page(params[:page]).per(3)
+      @reviews = @tag.reviews.page(params[:page]).per(6)
     else
-      @reviews = Review.all.page(params[:page]).per(3)
+      @reviews = Review.all.page(params[:page]).per(6)
     end
     # t
     @tag_list = Tag.all
@@ -27,8 +26,8 @@ class Admin::ReviewsController < ApplicationController
   end
 
   def search
-    @reviews = Review.where(product_id: params[:search][:product]).order(created_at: :desc).page(params[:page]).per(3)
+    @reviews = Review.where(product_id: params[:search][:product]).order(created_at: :desc).page(params[:page]).per(6)
     render :index
   end
-
+  
 end

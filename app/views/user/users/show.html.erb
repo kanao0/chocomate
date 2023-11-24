@@ -1,45 +1,38 @@
 <div class='container px-5 px-sm-0'>
   <div class='row'>
     <div class='col-md-3'>
-      <div class="row">
-        <%= image_tag @user.get_profile_image(200, 200) %>
+      <div class="row mt-5">
+        <div class="mb-2">
+          <%= image_tag @user.get_profile_image(200, 200) %>
+        </div>  
       </div>
-      <table class="teble">
-        <tr>
-          <th>ユーザーネーム</th>
-        </tr>
-        <tr>
-          <td><%= @user.name %></td>
-        </tr>
-        <tr>
-          <th>自己紹介</th>
-        </tr>
-        <tr>
-          <td><%= @user.bio %></td>
-        </tr>
-      </table>
-      <div>レビュー数：  <%= @user.reviews.count %></div>
+      
+      <div><strong>ユーザーネーム</strong></div>
+      <div class="mb-2"> <%= @user.name %></div>
+      <div><strong>自己紹介</strong></div>
+      <div class="mb-2"><%= @user.bio %></div>
+      <div class="mb-2">レビュー数：  <%= @user.reviews.count %></div>
 
 
     <% if current_user == @user %>
       <div class='row'>
         <% unless @user.guest_user? %>
-          <%= link_to bookmarks_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
+          <%= link_to bookmarks_user_path(@user.id), class: "btn btn-secondary btn-block" do %>
             <i class="fas fa-bookmark"></i>
           <% end %>
 
-          <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
+          <%= link_to edit_user_path(@user.id), class: "btn btn-secondary btn-block" do %>
             <i class="fas fa-user-cog"></i>
           <% end %>
         <% else %>
-          <%= link_to bookmarks_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
+          <%= link_to bookmarks_user_path(@user.id), class: "btn btn-secondary btn-block" do %>
             <i class="fas fa-bookmark"></i>
           <% end %>
         <% end %>
       </div>
     <% end %>
   </div>
-    <div class='col-md-8 offset-md-1'>
+    <div class='col-md-8 offset-md-1 mt-4'>
       <h4><%= @user.name %> さんのレビュー</h4>
       <table class="table">
         <thead>

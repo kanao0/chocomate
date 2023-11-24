@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="mb-4">
+  <div class="mt-4 mb-4">
     <h4>みんなのレビューチョコ
     <% if @tag.present? %>
     <i class="fa-sharp fa-solid fa-tag"></i>
@@ -9,10 +9,12 @@
     </h4>
 
     <div class="my-3">
-      <%= form_tag(admin_reviews_search_path, method: :get) do %>
-        <%= collection_select(:search, :product, Product.all, :id, :name) %>
-        <%= submit_tag '検索', name: nil %>
+    <%= form_tag(admin_reviews_search_path, method: :get, class: "form-inline my-2 my-lg-0") do %>
+      <%= collection_select(:search, :product, Product.all, :id, :name, { prompt: '選択してください' }, class: "form-control mr-sm-2") %>
+      <%= button_tag(type: 'submit', class: 'btn btn-primary my-2 my-sm-0') do %>
+        <i class="fas fa-search"></i>
       <% end %>
+    <% end %>
     </div>
   </div>
 

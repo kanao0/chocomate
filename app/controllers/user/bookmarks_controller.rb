@@ -6,7 +6,6 @@ class User::BookmarksController < ApplicationController
     @review = @bookmark.review
     if @bookmark.valid?
       @bookmark.save
-      # redirect_to review_path(@review), notice: "ブックマーク登録しました"
     end
   end
 
@@ -14,7 +13,6 @@ class User::BookmarksController < ApplicationController
     @bookmark = Bookmark.find(params[:id])
     @review = @bookmark.review
     @bookmark.destroy
-      # redirect_to review_path(@review), notice: "ブックマークを解除しました"
   end
 
   private

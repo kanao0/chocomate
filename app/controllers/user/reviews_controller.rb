@@ -26,11 +26,10 @@ class User::ReviewsController < ApplicationController
     # paramsにtag_nameが含まれているときそのtagがついてるレビューを表示
     if params[:tag_name]
       @tag = Tag.find_by(name: params[:tag_name])
-      @reviews = @tag.reviews.page(params[:page]).per(3)
+      @reviews = @tag.reviews.page(params[:page]).per(6)
     else
-      @reviews = Review.all.page(params[:page]).per(1)
+      @reviews = Review.all.page(params[:page]).per(6)
     end
-    # t
     @tag_list = Tag.all
   end
 
@@ -42,13 +41,12 @@ class User::ReviewsController < ApplicationController
 
   def edit
     @review = Review.find(params[:id])
-    # pluckはmapと同じ意味t
+    # pluckはmapと同じ意味
     @tag_list = @review.tags.pluck(:name).join(',')
   end
 
   def update
     @review = Review.find(params[:id])
-    # t
     tag_list = params[:review][:name].split(',')
     if @review.update(review_params)
       @review.save_tag(tag_list)
@@ -67,7 +65,7 @@ class User::ReviewsController < ApplicationController
   end
 
   def search
-    @reviews = Review.where(product_id: params[:search][:product]).order(created_at: :desc).page(params[:page]).per(3)
+    @reviews = Review.where(product_id: params[:search][:product]).order(created_at: :desc).page(params[:page]).per(6)
     render :index
   end
 
