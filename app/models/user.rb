@@ -26,11 +26,11 @@ class User < ApplicationRecord
       user.bio = "これはゲストユーザーです"
     end
   end
-  
+
   # メールアドレスがゲストユーザーのものであるかの判定
   def guest_user?
     email == GUEST_USER_EMAIL
-  end  
+  end
 
   # プロフィールイメージの設定(呼び出すとき引数必要!)
   def get_profile_image(width, height)
@@ -38,6 +38,6 @@ class User < ApplicationRecord
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
-    profile_image.variant(resize_to_limit: [width, height]).processed
+    profile_image.variant(gravity: :center, resize:"#{width}x#{height}^", crop:"#{width}x#{height}+0+0").processed
   end
 end

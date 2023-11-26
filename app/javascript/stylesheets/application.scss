@@ -57,6 +57,10 @@ body {
     height: auto;
 }
 
+.font-small {
+  font-size: 0.74em;
+}
+
 // 詳細ページ商品名
 .product-name {
   font-weight: bold;
@@ -70,6 +74,7 @@ body {
   font-size: 24px;
 }
 
-.font-small {
-  font-size: 0.74em;
+// レビュー投稿ページ
+.required-text {
+  color: red;
 }

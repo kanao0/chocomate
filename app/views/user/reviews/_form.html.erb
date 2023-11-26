@@ -1,15 +1,16 @@
 <%= form_with model: @review do |f| %>
-  <div>商品画像(必須)</div>
+<%= render "layouts/errors", obj: @review %>
+  <div>商品画像<span class="required-text">(必須)</span></div>
   <div>
     <%= f.file_field :image, accept: "image/*" %>
   </div>
 
-  <div><%= f.label :product_id,"商品" %></div>
+  <div class="mt-2"><%= f.label :product_id,"商品" %></div>
   <div>
     <%= f.select :product_id, Product.all.map { |product| [product.name, product.id] } %>
   </div>
-  <div>レビュー本文(必須)</div>
-  <div>
+  <div class="mt-2">レビュー本文<span class="required-text">(必須)</span></div>
+  <div class="mb-2">
     <%= f.text_area :body, size: "40x10" , placeholder: 'ここにレビューを入力してください（最大500文字）' %>
   </div>
   <!--タグ-->
@@ -19,7 +20,7 @@
   </div>
   <!--星評価-->
   <% if @review.id.nil? %>
-    <div class="form-group" id="star">
+    <div class="form-group mt-2" id="star">
       <%= f.label :rate,"星評価(1.0～5.0)" %>
       <%= f.hidden_field :rate, id: :review_star, class: 'form-control' %>
       <div id="post_raty"></div>

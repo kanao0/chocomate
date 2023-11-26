@@ -6,6 +6,28 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    attributes:
+      user:
+        bio: 自己紹介
+        name: ユーザーネーム
+        image: 画像
+      review:
+        rate: 評価
+        content: 内容
+        image: 画像
+        body: 本文
+      brand:
+        name: ブランド名
+      origin:
+        name: 産地
+      type:
+        name: 種類
+      product:
+        name: 商品名
+        brand: ブランド名
+        origin: 産地
+        type: 種類
+        price: 価格
   date:
     abbr_day_names:
     - 日
@@ -16,7 +38,7 @@ ja:
     - 金
     - 土
     abbr_month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月
@@ -42,7 +64,7 @@ ja:
       long: "%Y年%m月%d日(%a)"
       short: "%m/%d"
     month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月

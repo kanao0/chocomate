@@ -50,7 +50,7 @@ class Review < ApplicationRecord
   end
 
 
-  # レビューイメージの設定(呼び出すとき引数必要!)
+  # レビューイメージの設定(呼び出すとき引数必要!),画像の調整
   def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')
