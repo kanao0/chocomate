@@ -32,7 +32,6 @@
 - IDE：Cloud9
 ​
 ## 使用素材
-- Unsplash (https://unsplash.com/ja) （使用検討中）
-- Pexels　(https://www.pexels.com/ja-jp/) （使用検討中）
-- pixabay (https://pixabay.com/) （使用検討中）
-- FREEP!K (https://www.freepik.com/icons) （使用検討中）
+- Unsplash (https://unsplash.com/ja) 
+- Pexels　(https://www.pexels.com/ja-jp/) 
+- pixabay (https://pixabay.com/) 
