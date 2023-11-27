@@ -1,11 +1,11 @@
 class Admin::OriginsController < ApplicationController
   before_action :authenticate_admin!
-  
+
   def index
     @origin = Origin.new
-    @origins = Origin.all
+    @origins = Origin.all.page(params[:page]).per(10)
   end
-  
+
   def create
     @origin = Origin.new(origin_params)
     if @origin.save
@@ -13,15 +13,15 @@ class Admin::OriginsController < ApplicationController
       redirect_to admin_origins_path
     else
     # エラーの場合一覧に戻る
-      @origins = Origin.all
+      @origins = Origin.all.page(params[:page]).per(10)
       render :index
-    end    
-  end  
+    end
+  end
 
   def edit
-    @origin = Origin.find(params[:id])    
+    @origin = Origin.find(params[:id])
   end
-  
+
   def update
     @origin = Origin.find(params[:id])
     if @origin.update(origin_params)
@@ -33,17 +33,17 @@ class Admin::OriginsController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     @origin = Origin.find(params[:id])
     @origin.destroy
-    flash[:notice] = "削除しました"    
-    redirect_to  admin_origins_path    
+    flash[:notice] = "削除しました"
+    redirect_to  admin_origins_path
   end
-  
-  
+
+
   def origin_params
     params.require(:origin).permit(:name)
-  end  
-  
+  end
+
 end

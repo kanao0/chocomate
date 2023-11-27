@@ -3,7 +3,7 @@ class Admin::BrandsController < ApplicationController
 
   def index
     @brand = Brand.new
-    @brands = Brand.all
+    @brands = Brand.all.page(params[:page]).per(10)
   end
 
   def create
@@ -13,7 +13,7 @@ class Admin::BrandsController < ApplicationController
       redirect_to admin_brands_path
     else
     # エラーの場合一覧に戻る
-      @brands = Brand.all
+      @brands = Brand.all.page(params[:page]).per(10)
       render :index
     end
 

@@ -3,7 +3,7 @@
     <h5 class="border-bottom p-3 my-3">
       産地一覧・追加
     </h5>
-  </div>  
+  </div>
   <%= render "layouts/errors", obj: @origin %>
   <div class="row d-flex justify-content-center my-3">
     <%= form_with model: @origin, url: admin_origins_path, method: :post do |f| %>
@@ -44,5 +44,8 @@
         </tbody>
       </table>
     </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <%= paginate @origins, theme: 'bootstrap-5'%>
   </div>
 </div>

@@ -45,7 +45,6 @@
     </div>
   </div>
   
-<!--一覧  -->
   <div class="row d-flex justify-content-center mt-5">
     <table class="table">
       <thead>
@@ -75,5 +74,7 @@
       </tbody>
     </table>
   </div>
-  ページベーション
+  <div class="d-flex justify-content-center">
+    <%= paginate @products, theme: 'bootstrap-5'%>
+  </div>
 </div>

@@ -3,7 +3,7 @@ class Admin::ProductsController < ApplicationController
   
   def index
     @product = Product.new
-    @products = Product.all
+    @products = Product.all.page(params[:page]).per(10)
   end
 
   def create
@@ -13,7 +13,7 @@ class Admin::ProductsController < ApplicationController
       redirect_to admin_products_path
     else
     # エラーの場合一覧に戻る
-      @products = Product.all
+      @products = Product.all.page(params[:page]).per(10)
       render :index
     end    
   end  
@@ -29,7 +29,7 @@ class Admin::ProductsController < ApplicationController
     #変更後一覧画面にリダイレクト
       redirect_to admin_products_path
     else
-      # エラーの場合編集画面に戻る
+    # エラーの場合編集画面に戻る
       render :edit
     end
   end
@@ -45,6 +45,5 @@ class Admin::ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:name, :brand_id, :price, :origin_id, :type_id )
   end  
-   
 
 end

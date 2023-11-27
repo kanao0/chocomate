@@ -13,7 +13,6 @@ ja:
         image: 画像
       review:
         rate: 評価
-        content: 内容
         image: 画像
         body: 本文
       brand:

@@ -3,7 +3,7 @@ class Admin::TypesController < ApplicationController
   
   def index
     @type = Type.new
-    @types = Type.all
+    @types = Type.all.page(params[:page]).per(10)
   end
   
   def create
@@ -13,7 +13,7 @@ class Admin::TypesController < ApplicationController
       redirect_to admin_types_path
     else
     # エラーの場合一覧に戻る
-      @types = Type.all
+      @types = Type.all.page(params[:page]).per(10)
       render :index
     end    
   end  
