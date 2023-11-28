@@ -21,17 +21,17 @@ class User::ReviewsController < ApplicationController
       render :new
     end
   end
-
+    
   def index
     # paramsにtag_nameが含まれているときそのtagがついてるレビューを表示
     if params[:tag_name]
       @tag = Tag.find_by(name: params[:tag_name])
-      @reviews = @tag.reviews.page(params[:page]).per(6)
+      @reviews = @tag.reviews.order(created_at: :desc).page(params[:page]).per(6)
     else
-      @reviews = Review.all.page(params[:page]).per(6)
+      @reviews = Review.order(created_at: :desc).page(params[:page]).per(6)
     end
     @tag_list = Tag.all
-  end
+  end  
 
   def show
     @review = Review.find(params[:id])
