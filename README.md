@@ -22,7 +22,7 @@
 <!--・チョコレートが好きな人同士の交流-->
 
 ## ER図
-https://github.com/kanao0/chocomate/assets/143867420/4c5d48bd-439b-4d09-b782-1d69e9a2c4a3​
+![ER図_chocomate! drawio](https://github.com/kanao0/chocomate/assets/143867420/4c5d48bd-439b-4d09-b782-1d69e9a2c4a3)
 
 ## 開発環境
 - OS：Linux(CentOS)
