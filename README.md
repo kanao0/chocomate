@@ -21,6 +21,9 @@
 - 自分が美味しいと思ったチョコレートをおすすめしたり、良さを広めたい時
 <!--・チョコレートが好きな人同士の交流-->
 
+## AWS構成図
+![AWS構成図 drawio](https://github.com/kanao0/chocomate/assets/143867420/5ff37637-bf1e-4029-a61b-894842b78c67)
+
 ## ER図
 ![ER図_chocomate! drawio](https://github.com/kanao0/chocomate/assets/143867420/4c5d48bd-439b-4d09-b782-1d69e9a2c4a3)
 
