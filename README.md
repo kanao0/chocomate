@@ -21,9 +21,9 @@
 - 自分が美味しいと思ったチョコレートをおすすめしたり、良さを広めたい時
 <!--・チョコレートが好きな人同士の交流-->
 
-## 設計書
-後ほど作成予定
-​
+## ER図
+https://github.com/kanao0/chocomate/assets/143867420/4c5d48bd-439b-4d09-b782-1d69e9a2c4a3​
+
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
