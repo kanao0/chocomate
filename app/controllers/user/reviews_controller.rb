@@ -1,7 +1,7 @@
 class User::ReviewsController < ApplicationController
-  # edit,updateアクション前にensure_correct_user実行
-  before_action :ensure_correct_user, only: [:edit, :update]
-  before_action :authenticate_user!, only: [:edit, :update]
+  # edit,update,destroyアクション前にensure_correct_user実行
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
   def new
     @review = Review.new
@@ -21,7 +21,7 @@ class User::ReviewsController < ApplicationController
       render :new
     end
   end
-    
+
   def index
     # paramsにtag_nameが含まれているときそのtagがついてるレビューを表示
     if params[:tag_name]
@@ -31,7 +31,7 @@ class User::ReviewsController < ApplicationController
       @reviews = Review.order(created_at: :desc).page(params[:page]).per(6)
     end
     @tag_list = Tag.all
-  end  
+  end
 
   def show
     @review = Review.find(params[:id])
@@ -40,13 +40,11 @@ class User::ReviewsController < ApplicationController
   end
 
   def edit
-    @review = Review.find(params[:id])
     # pluckはmapと同じ意味
     @tag_list = @review.tags.pluck(:name).join(',')
   end
 
   def update
-    @review = Review.find(params[:id])
     tag_list = params[:review][:name].split(',')
     if @review.update(review_params)
       @review.save_tag(tag_list)
@@ -57,8 +55,6 @@ class User::ReviewsController < ApplicationController
   end
 
   def destroy
-    @review = Review.find(params[:id])
-    @user = current_user
     @review.destroy
     flash[:notice] = "投稿を削除しました"
     redirect_to user_path(@user)
@@ -75,12 +71,13 @@ class User::ReviewsController < ApplicationController
   end
 
   # 他人のreview編集画面へのアクセス禁止
-  # 勝手に編集しようとする人は自分のuser/showページへ行く
+  # 勝手に編集、削除しようとする人はTOPページへ行く
   def ensure_correct_user
     @review = Review.find(params[:id])
     @user = current_user
     unless @review.user == @user
-      redirect_to user_path(current_user.id)
+      flash[:alert] = "他ユーザーの投稿は編集・削除できません。"
+      redirect_to root_path
     end
   end
 
