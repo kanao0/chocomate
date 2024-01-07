@@ -20,9 +20,9 @@
             <% if review.image.attached? %>
               <%= image_tag review.get_image(200, 200), class: "card-img-top" %>
             <% else %>
-              <%= image_tag 'default-image.jpg', class: "card-img-top" %>
+              <%= image_tag 'no_image.jpg', class: "card-img-top" %>
             <% end %>
-            <%= image_tag review.get_image(200, 200), class: "card-img-top" %>
+            <!--< %= image_tag review.get_image(200, 200), class: "card-img-top" %>-->
           </a>
           <div class="card-body">
             <p class="card-title"><%= review.product.name %></p>
