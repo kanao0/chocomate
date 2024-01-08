@@ -17,12 +17,7 @@
       <div class="col-12 col-md-6 col-lg-3 mb-4">
         <div class="card">
           <a href="<%= admin_signed_in? ? admin_review_path(review.id) : review_path(review.id) %>">
-            <% if review.image.attached? %>
-              <%= image_tag review.get_image(200, 200), class: "card-img-top" %>
-            <% else %>
-              <%= image_tag 'no_image.jpg', class: "card-img-top" %>
-            <% end %>
-            <!--< %= image_tag review.get_image(200, 200), class: "card-img-top" %>-->
+            <%= image_tag review.get_image(200, 200), class: "card-img-top" %>
           </a>
           <div class="card-body">
             <p class="card-title"><%= review.product.name %></p>
