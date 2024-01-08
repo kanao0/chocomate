@@ -32,6 +32,11 @@ class User < ApplicationRecord
     email == GUEST_USER_EMAIL
   end
 
+  def active_for_authentication?
+    super && is_active # ユーザーがログインするためには、active?がtrueを返すことも必要
+  end
+
+
   # プロフィールイメージの設定(呼び出すとき引数必要!)
   def get_profile_image(width, height)
     unless profile_image.attached?
